@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="1" author="Zakella">
+        <sql>
+            CREATE TABLE IF NOT EXISTS basket (
+                                    id INTEGER PRIMARY KEY,
+                                    customer_id INTEGER NOT NULL,
+                                    FOREIGN KEY (customer_id) REFERENCES customers (id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="Zakella">
+        <sql>
+            ALTER TABLE basket
+                ADD product_id INTEGER
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
