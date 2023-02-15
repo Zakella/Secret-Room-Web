@@ -13,13 +13,12 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Getter
 @Setter
 @Entity(name = "users")
 public class ApplicationUser implements UserDetails {
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private Long id;
     private String firstname;
     private String lastname;
@@ -27,10 +26,23 @@ public class ApplicationUser implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private ApplicationUserRole userRole;
 
     private Boolean locked = false;
     private Boolean enabled = false;
+
+    public ApplicationUser(String firstName,
+                   String lastName,
+                   String email,
+                   String password,
+                   ApplicationUserRole appUserRole) {
+        this.firstname = firstName;
+        this.lastname = lastName;
+        this.email = email;
+        this.password = password;
+        this.userRole = appUserRole;
+    }
 
 
     @Override
