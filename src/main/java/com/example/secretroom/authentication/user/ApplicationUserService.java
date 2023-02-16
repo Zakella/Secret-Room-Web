@@ -2,6 +2,8 @@ package com.example.secretroom.authentication.user;
 
 import com.example.secretroom.authentication.security.ApplicationPasswordEncoder;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +38,7 @@ public class ApplicationUserService implements UserDetailsService {
     }
 
 
-    public String signUpUser(ApplicationUser appUser) {
+    public ResponseEntity<String> signUpUser(ApplicationUser appUser) {
         boolean userExists = applicationUserRepository
                 .findByEmail(appUser.getEmail())
                 .isPresent();
@@ -45,7 +47,8 @@ public class ApplicationUserService implements UserDetailsService {
             // TODO check of attributes are the same and
             // TODO if email not confirmed send confirmation email.
 
-            throw new IllegalStateException("email already taken");
+//            throw new IllegalStateException("email already taken");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User with email already exists");
         }
 
         String encodedPassword = passwordEncoder
@@ -55,8 +58,6 @@ public class ApplicationUserService implements UserDetailsService {
 
         applicationUserRepository.save(appUser);
 
-        String token = UUID.randomUUID().toString();
-
-        return token;
+        return  ResponseEntity.ok("User successfully signed up");
     }
 }

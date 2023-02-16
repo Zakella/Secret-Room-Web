@@ -4,6 +4,7 @@ import com.example.secretroom.authentication.user.ApplicationUser;
 import com.example.secretroom.authentication.user.ApplicationUserRole;
 import com.example.secretroom.authentication.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import static com.example.secretroom.authentication.user.ApplicationUserRole.USER;
@@ -15,13 +16,9 @@ public class RegistrationService {
     private final EmailValidator emailValidator;
     private final ApplicationUserService applicationUserService;
 
-    public String register(RegistrationRequest request) {
-        boolean isValidEmail = emailValidator.
-                test(request.getEmail());
+    public ResponseEntity<String>  register(RegistrationRequest request) {
 
-        if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
-        }
+        emailValidator.validate(request.getEmail());
 
         return applicationUserService.signUpUser(
                 new ApplicationUser(

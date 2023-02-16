@@ -30,7 +30,7 @@ public class ApplicationUser implements UserDetails {
     private ApplicationUserRole userRole;
 
     private Boolean locked = false;
-    private Boolean enabled = false;
+    private Boolean enabled = true;
 
     public ApplicationUser(String firstName,
                    String lastName,
@@ -64,7 +64,7 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
