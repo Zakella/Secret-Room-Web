@@ -1,7 +1,6 @@
 package com.example.secretroom.authentication.registration;
 
 import com.example.secretroom.authentication.user.ApplicationUser;
-import com.example.secretroom.authentication.user.ApplicationUserRole;
 import com.example.secretroom.authentication.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +17,14 @@ public class RegistrationService {
 
     public ResponseEntity<String>  register(RegistrationRequest request) {
 
-        emailValidator.validate(request.getEmail());
+        emailValidator.validate(request.email());
 
         return applicationUserService.signUpUser(
                 new ApplicationUser(
-                        request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPassword(),
+                        request.firstName(),
+                        request.lastName(),
+                        request.email(),
+                        request.password(),
                         USER
 
                 )
