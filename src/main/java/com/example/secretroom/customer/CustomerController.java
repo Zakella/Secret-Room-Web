@@ -1,5 +1,10 @@
 package com.example.secretroom.customer;
+
+import com.example.secretroom.customer.registration.CustomerRegistrationRequest;
+import com.example.secretroom.customer.registration.CustomerRegistrationService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,13 +14,15 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class CustomerController {
+
+    private final CustomerRegistrationService customerRegistrationService;
     private final CustomerService customerService;
-    private final CustomerRepository customerRepository;
 
     @PostMapping()
-    public void createCustomer(@RequestBody Customer customer) {
-        customerService.saveCustomer(customer);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<String> createCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
 
+        return customerRegistrationService.registerCustomer(customerRegistrationRequest);
     }
 
     @GetMapping(path = "{id}")

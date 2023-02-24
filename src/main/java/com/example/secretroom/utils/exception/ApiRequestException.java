@@ -1,4 +1,4 @@
-package exception;
+package com.example.secretroom.utils.exception;
 
 public class ApiRequestException extends RuntimeException {
 

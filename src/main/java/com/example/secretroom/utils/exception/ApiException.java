@@ -1,4 +1,4 @@
-package exception;
+package com.example.secretroom.utils.exception;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

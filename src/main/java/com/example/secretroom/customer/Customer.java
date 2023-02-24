@@ -1,18 +1,19 @@
 package com.example.secretroom.customer;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
 
 @Entity(name = "customers")
 @Table(name = "customers")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class Customer {
 
     @Id
@@ -22,6 +23,5 @@ public class Customer {
     private  String lastname;
     private  String phone;
     private  String email;
-
 
 }
