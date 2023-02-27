@@ -3,9 +3,13 @@ package com.example.secretroom.customer.dto;
 import com.example.secretroom.customer.Customer;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class CustomerDTO {
 
-    private final Customer customer;
+public record CustomerDTO(
+
+        Long id,
+        String name,
+        String lastname,
+        String phone,
+        String email) {
 
 }

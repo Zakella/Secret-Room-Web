@@ -1,5 +1,7 @@
 package com.example.secretroom.customer;
 
+import com.example.secretroom.customer.dto.CustomerDTO;
+import com.example.secretroom.customer.dto.CustomerDTOMapper;
 import com.example.secretroom.utils.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerDTOMapper customerDTOMapper;
 
     public ResponseEntity<String> saveCustomer(Customer customer) {
 
@@ -26,9 +29,11 @@ public class CustomerService {
     }
 
 
-    public Customer getCustomer(Long id) {
+
+    public CustomerDTO getCustomer(Long id) {
         return customerRepository.
-                findById(id)
+                findById(id).
+                map(customerDTOMapper)
                 .orElseThrow(() ->
                 {
                     return new NotFoundException("Customer width id " + id + " not found");

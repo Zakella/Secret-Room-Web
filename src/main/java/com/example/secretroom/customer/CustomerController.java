@@ -1,5 +1,6 @@
 package com.example.secretroom.customer;
 
+import com.example.secretroom.customer.dto.CustomerDTO;
 import com.example.secretroom.customer.registration.CustomerRegistrationRequest;
 import com.example.secretroom.customer.registration.CustomerRegistrationService;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class CustomerController {
     }
 
     @GetMapping(path = "{id}")
-    Customer getCustomer(@PathVariable("id") Long id) {
+    CustomerDTO getCustomer(@PathVariable("id") Long id) {
         return this.customerService.getCustomer(id);
     }
 
