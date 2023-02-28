@@ -35,9 +35,7 @@ public class CustomerService {
                 findById(id).
                 map(customerDTOMapper)
                 .orElseThrow(() ->
-                {
-                    return new NotFoundException("Customer width id " + id + " not found");
-                });
+                        new NotFoundException("Customer width id " + id + " not found"));
     }
 
 
